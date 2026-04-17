@@ -31,6 +31,7 @@ const corsOptions = {
     }
   },
   credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
 };
 
 const app = express();
