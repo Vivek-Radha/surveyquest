@@ -17,19 +17,29 @@ import adminRoutes from './routes/admin.js';
 
 dotenv.config();
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://surveyquest-blush.vercel.app'
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-  cors: {
-    origin: 'http://localhost:3000',
-    credentials: true,
-  }
+  cors: corsOptions
 });
 
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true,
-}));
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
