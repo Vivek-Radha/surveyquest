@@ -142,6 +142,66 @@ const TakeSurvey = () => {
             </div>
           )}
 
+          {question.type === 'Checkbox' && (
+            <div className="space-y-4">
+              {question.options.map(opt => {
+                const currentAnswer = getCurrentAnswer(question._id) || '';
+                const isChecked = currentAnswer.split(',').includes(opt);
+                return (
+                  <label 
+                    key={opt}
+                    className={`w-full flex items-center cursor-pointer px-6 py-5 rounded-xl border-2 transition-all font-medium text-lg ${
+                      isChecked
+                        ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400 shadow-md transform scale-[1.01]' 
+                        : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-800 text-gray-700 dark:text-gray-300 hover:border-primary-300 hover:bg-gray-50 dark:hover:bg-dark-700'
+                    }`}
+                  >
+                    <div className="flex-1">{opt}</div>
+                    <div className={`w-6 h-6 rounded border-2 flex items-center justify-center ${isChecked ? 'bg-primary-500 border-primary-500' : 'border-gray-300 dark:border-gray-600'}`}>
+                       {isChecked && <CheckCircle className="w-4 h-4 text-white" />}
+                    </div>
+                    <input 
+                      type="checkbox" 
+                      className="hidden"
+                      checked={isChecked}
+                      onChange={() => {
+                         let currentArray = currentAnswer ? currentAnswer.split(',') : [];
+                         if (isChecked) {
+                           currentArray = currentArray.filter(o => o !== opt);
+                         } else {
+                           currentArray.push(opt);
+                         }
+                         setAnswer(question._id, currentArray.join(','));
+                      }}
+                    />
+                  </label>
+                )
+              })}
+            </div>
+          )}
+
+          {question.type === 'Dropdown' && (
+            <select 
+              className="w-full bg-gray-50 dark:bg-dark-900 border border-gray-200 dark:border-gray-700 rounded-xl px-6 py-5 focus:outline-none focus:ring-2 focus:ring-primary-500 text-xl transition-shadow text-gray-900 dark:text-gray-100"
+              value={getCurrentAnswer(question._id) || ''}
+              onChange={(e) => setAnswer(question._id, e.target.value)}
+            >
+              <option value="" disabled>Select an option...</option>
+              {question.options.map(opt => (
+                <option key={opt} value={opt}>{opt}</option>
+              ))}
+            </select>
+          )}
+
+          {question.type === 'Date' && (
+            <input 
+              type="date" 
+              className="w-full bg-gray-50 dark:bg-dark-900 border border-gray-200 dark:border-gray-700 rounded-xl px-6 py-5 focus:outline-none focus:ring-2 focus:ring-primary-500 text-xl transition-shadow text-gray-900 dark:text-gray-100"
+              value={getCurrentAnswer(question._id) || ''}
+              onChange={(e) => setAnswer(question._id, e.target.value)}
+            />
+          )}
+
           {question.type === 'Rating' && (
             <div className="flex justify-center gap-4 py-6">
               {[...Array(question.maxRating || 5)].map((_, i) => (

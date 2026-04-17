@@ -5,6 +5,10 @@ import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cookieParser from 'cookie-parser';
+import dns from 'dns';
+
+// Override local DNS to Google's Public DNS to bypass SRV query blocks
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 // Routes
 import authRoutes from './routes/auth.js';

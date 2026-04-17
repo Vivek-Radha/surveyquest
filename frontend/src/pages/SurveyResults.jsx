@@ -137,7 +137,7 @@ const SurveyResults = () => {
                            <div className="flex flex-col gap-1">
                               {log.answers.map((a, idx) => (
                                 <span key={idx} className="bg-gray-100 dark:bg-dark-700 px-2 py-1 rounded text-xs truncate">
-                                   Q{idx+1}: {a.answerText}
+                                   Q{idx+1}: {a.answerText || a.ratingValue}
                                 </span>
                               ))}
                            </div>
