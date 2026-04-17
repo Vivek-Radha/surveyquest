@@ -38,7 +38,7 @@ router.post('/signup', async (req, res) => {
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
         maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
       }).status(201).json({
-        _id: user._id, name: user.name, email: user.email, role: user.role
+        _id: user._id, name: user.name, email: user.email, role: user.role, token
       });
     }
   } catch (error) {
@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
       }
 
       res.cookie('token', token, cookieOptions).json({
-        _id: user._id, name: user.name, email: user.email, role: user.role
+        _id: user._id, name: user.name, email: user.email, role: user.role, token
       });
     } else {
       res.status(401).json({ message: 'Invalid email or password' });
