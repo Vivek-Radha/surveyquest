@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Database, Users, Zap } from 'lucide-react';
-import MinimalImage from 'C:/Users/vivek/.gemini/antigravity/brain/576f640a-ee9a-42e9-b577-c76445fa2b27/dashboard_minimal_1775891456003.png';
+import MinimalImage from '../assets/dashboard_minimal.png';
 
 const FeatureCard = ({ icon: Icon, title, description, delay }) => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay, duration: 0.5 }}
@@ -37,10 +37,10 @@ const Home = () => {
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl leading-relaxed">
             Create, distribute, and analyze surveys in real-time with stunning UI and seamless user experience. Designed for product teams and modern organizations.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4">
             <Link to="/login">
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary-600 text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
@@ -64,21 +64,21 @@ const Home = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
-        <FeatureCard 
-          icon={Zap} 
-          title="Real-Time Analytics" 
+        <FeatureCard
+          icon={Zap}
+          title="Real-Time Analytics"
           description="Watch your results update instantly with our WebSocket powered dashboards."
           delay={0.2}
         />
-        <FeatureCard 
-          icon={Users} 
-          title="Audience Insights" 
+        <FeatureCard
+          icon={Users}
+          title="Audience Insights"
           description="Discover powerful metrics about your respondents with built in demographic trackers."
           delay={0.4}
         />
-        <FeatureCard 
-          icon={Database} 
-          title="Secure Database" 
+        <FeatureCard
+          icon={Database}
+          title="Secure Database"
           description="Your data is safely stored and encrypted using industry standard MongoDB and bcrypt."
           delay={0.6}
         />
