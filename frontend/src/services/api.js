@@ -5,13 +5,24 @@ if (base && !base.endsWith('/api')) {
 const BASE_URL = base;
 
 const fetchWithCreds = async (url, options = {}) => {
+  let user = null;
+  try {
+    user = JSON.parse(localStorage.getItem('user')) || JSON.parse(sessionStorage.getItem('user'));
+  } catch (e) {}
+
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  };
+
+  if (user && user.token) {
+    headers['Authorization'] = `Bearer ${user.token}`;
+  }
+
   const mergedOptions = {
     ...options,
     credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
+    headers,
   };
   const res = await fetch(url, mergedOptions);
   if (!res.ok) {
