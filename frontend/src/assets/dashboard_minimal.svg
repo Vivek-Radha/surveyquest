@@ -1,0 +1,38 @@
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="800" height="500" rx="24" fill="#F8FAFC" />
+<!-- Sidebar -->
+<rect x="24" y="24" width="180" height="452" rx="16" fill="#FFFFFF" />
+<rect x="48" y="48" width="120" height="24" rx="6" fill="#EEF2FF" />
+<rect x="48" y="96" width="90" height="12" rx="6" fill="#F1F5F9" />
+<rect x="48" y="124" width="110" height="12" rx="6" fill="#F1F5F9" />
+<rect x="48" y="152" width="80" height="12" rx="6" fill="#F1F5F9" />
+<rect x="48" y="180" width="100" height="12" rx="6" fill="#F1F5F9" />
+<!-- Main Header -->
+<rect x="228" y="24" width="548" height="80" rx="16" fill="#FFFFFF" />
+<circle cx="268" cy="64" r="16" fill="#4F46E5" />
+<rect x="300" y="58" width="160" height="12" rx="6" fill="#E2E8F0" />
+<rect x="690" y="44" width="60" height="40" rx="12" fill="#F1F5F9" />
+<!-- Main Chart Area -->
+<rect x="228" y="128" width="340" height="200" rx="16" fill="#FFFFFF" />
+<!-- Bar Chart relative paths -->
+<path d="M260 290V240C260 237.791 261.791 236 264 236H286C288.209 236 290 237.791 290 240V290H260Z" fill="#818CF8" />
+<path d="M310 290V200C310 197.791 311.791 196 314 196H336C338.209 196 340 197.791 340 200V290H310Z" fill="#4F46E5" />
+<path d="M360 290V160C360 157.791 361.791 156 364 156H386C388.209 156 390 157.791 390 160V290H360Z" fill="#C7D2FE" />
+<path d="M410 290V220C410 217.791 411.791 216 414 216H436C438.209 216 440 217.791 440 220V290H410Z" fill="#818CF8" />
+<path d="M460 290V190C460 187.791 461.791 186 464 186H486C488.209 186 490 187.791 490 190V290H460Z" fill="#4F46E5" />
+<path d="M510 290V260C510 257.791 511.791 256 514 256H536C538.209 256 540 257.791 540 260V290H510Z" fill="#C7D2FE" />
+<!-- Top Stat Card -->
+<rect x="592" y="128" width="184" height="90" rx="16" fill="#4F46E5" />
+<circle cx="632" cy="173" r="20" fill="#FFFFFF" fill-opacity="0.2" />
+<rect x="665" y="153" width="70" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.8" />
+<rect x="665" y="173" width="40" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4" />
+<!-- Bottom Stat Card -->
+<rect x="592" y="238" width="184" height="90" rx="16" fill="#FFFFFF" />
+<circle cx="632" cy="283" r="20" fill="#10B981" fill-opacity="0.1" />
+<rect x="665" y="263" width="70" height="10" rx="5" fill="#E2E8F0" />
+<rect x="665" y="283" width="40" height="10" rx="5" fill="#F1F5F9" />
+<!-- Data List -->
+<rect x="228" y="352" width="548" height="124" rx="16" fill="#FFFFFF" />
+<rect x="260" y="380" width="480" height="16" rx="8" fill="#F1F5F9" />
+<rect x="260" y="416" width="380" height="16" rx="8" fill="#F1F5F9" />
+</svg>

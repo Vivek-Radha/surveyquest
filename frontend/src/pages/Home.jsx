@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Database, Users, Zap } from 'lucide-react';
-import MinimalImage from '../assets/dashboard_minimal.png';
+import MinimalImage from '../assets/dashboard_minimal.svg';
 
 const FeatureCard = ({ icon: Icon, title, description, delay }) => (
   <motion.div
