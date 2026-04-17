@@ -29,7 +29,8 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
   return children;
 };
 
-const socket = io('http://localhost:5000');
+const socket = io(import.meta.env.VITE_API_URL || 'http://localhost:5000');
+
 
 function App() {
   useEffect(() => {
@@ -58,7 +59,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            
+
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <Dashboard />
@@ -79,15 +80,15 @@ function App() {
                 <SurveyResults />
               </ProtectedRoute>
             } />
-            
+
             <Route path="/admin" element={
               <ProtectedRoute requireAdmin={true}>
                 <AdminDashboard />
               </ProtectedRoute>
             } />
-            
+
             <Route path="/survey/:shareLink" element={<TakeSurvey />} />
-            
+
             {/* 404 Route */}
             <Route path="*" element={
               <div className="flex flex-col items-center justify-center h-[60vh]">
