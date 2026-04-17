@@ -28,14 +28,12 @@ const Home = () => {
           transition={{ duration: 0.5 }}
           className="flex-1 text-left"
         >
-          <div className="inline-block px-4 py-1.5 rounded-full border border-primary-200 dark:border-primary-900/50 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400 mb-6 font-semibold text-sm">
-            Enterprise Grade Data Collection
-          </div>
+
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 text-gray-900 dark:text-white tracking-tight leading-tight">
             Surveys from the <span className="text-primary-600">Future</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl leading-relaxed">
-            Create, distribute, and analyze surveys in real-time with stunning UI and seamless user experience. Designed for product teams and modern organizations.
+            Create, distribute, and analyze surveys in real-time and seamless user experience.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
