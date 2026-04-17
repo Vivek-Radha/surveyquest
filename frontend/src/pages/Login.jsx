@@ -86,14 +86,14 @@ const Login = () => {
               <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                 <Activity className="w-6 h-6 text-white" />
               </div>
-              <span className="font-bold text-xl text-white tracking-wide">Survey Quest</span>
+              <span className="font-bold text-xl text-white tracking-wide">Developer Survey Portal</span>
             </div>
 
             <h1 className="text-3xl font-extrabold text-white leading-snug mb-4">
-              Connect with your<br/>audience in <span className="text-indigo-400">real time</span>
+              Gather feedback from your<br/>tech teams in <span className="text-indigo-400">real time</span>
             </h1>
             <p className="text-slate-400 text-[15px] max-w-[280px] leading-relaxed">
-              Surveys, analytics, and insights<br/>— all in one place
+              Sprint retrospectives, tech stack feedback, and deployment insights<br/>— all in one centralized hub
             </p>
           </div>
 
@@ -105,7 +105,7 @@ const Login = () => {
               transition={{ delay: 0.2 }}
               className="bg-slate-800/80 backdrop-blur-sm border border-slate-700 text-slate-300 rounded-2xl rounded-bl-sm p-4 text-[13px] font-medium max-w-[85%] self-start shadow-xl shadow-black/20"
             >
-              back again? more responses waiting 👀
+              ping: incoming feedback on the new API design 👀
             </motion.div>
             
             <motion.div 
@@ -114,7 +114,7 @@ const Login = () => {
               transition={{ delay: 0.5 }}
               className="bg-indigo-500 text-white rounded-2xl rounded-br-sm p-4 text-[13px] font-medium max-w-[85%] self-end shadow-xl shadow-indigo-500/20"
             >
-              dashboard updated in real time ⚡
+              telemetry dashboard updated ⚡
             </motion.div>
 
             <motion.div 
@@ -123,7 +123,7 @@ const Login = () => {
               transition={{ delay: 0.8 }}
               className="bg-slate-800/80 backdrop-blur-sm border border-slate-700 text-slate-300 rounded-2xl rounded-bl-sm p-4 text-[13px] font-medium max-w-[85%] self-start shadow-xl shadow-black/20"
             >
-              you're closer to your goal than you think 🎯
+              sprint goals are looking green this week 🎯
             </motion.div>
           </div>
 
@@ -134,10 +134,10 @@ const Login = () => {
           
           <div className="w-full max-w-[380px] mx-auto">
             <h2 className="text-[32px] font-extrabold text-slate-900 dark:text-white tracking-tight mb-2">
-              {isLogin ? 'Welcome back' : 'Create an account'}
+              {isLogin ? 'Authenticate Access' : 'Initialize Account'}
             </h2>
             <p className="text-slate-500 dark:text-slate-400 text-[15px] mb-10">
-              {isLogin ? 'Sign in to your account to continue' : 'Sign up to start building surveys'}
+              {isLogin ? 'Provide your credentials to establish a session' : 'Provision a new user workspace for survey deployment'}
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
