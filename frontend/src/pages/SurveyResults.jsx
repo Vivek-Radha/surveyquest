@@ -35,7 +35,8 @@ const SurveyResults = () => {
     fetchData();
 
     // Specific room/channel Socket.io integration can go here
-    const socket = io('http://localhost:5000');
+    const socketUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5001').replace(/\/api\/?$/, '');
+    const socket = io(socketUrl);
     socket.on('newResponse', (data) => {
       if (data.surveyId === survey._id && data.response) {
         setLogs(prev => [data.response, ...prev]);

@@ -1,4 +1,8 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+let base = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+if (base && !base.endsWith('/api')) {
+  base = base.replace(/\/$/, '') + '/api';
+}
+const BASE_URL = base;
 
 const fetchWithCreds = async (url, options = {}) => {
   const mergedOptions = {
