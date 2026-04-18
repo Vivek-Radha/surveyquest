@@ -1,24 +1,46 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, CartesianGrid } from 'recharts';
 import { motion } from 'framer-motion';
 import { Users, FileText, Activity, Trash2 } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { io } from 'socket.io-client';
 import { api } from '../services/api';
-
-const mockData = [
-  { name: 'Mon', responses: 12 },
-  { name: 'Tue', responses: 19 },
-  { name: 'Wed', responses: 15 },
-  { name: 'Thu', responses: 22 },
-  { name: 'Fri', responses: 30 },
-  { name: 'Sat', responses: 45 },
-  { name: 'Sun', responses: 38 },
-];
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({ users: 0, surveys: 0, responses: 0 });
   const [logs, setLogs] = useState([]);
   const [pulseLine, setPulseLine] = useState(false);
+
+  const velocityData = useMemo(() => {
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const velocity = [];
+    const today = new Date();
+    for (let i = 6; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
+        velocity.push({ name: days[d.getDay()], responses: 0, date: d.toDateString() });
+    }
+    logs.forEach(log => {
+      const d = new Date(log.createdAt);
+      const v = velocity.find(item => item.date === d.toDateString());
+      if (v) {
+        v.responses++;
+      }
+    });
+    return velocity;
+  }, [logs]);
+
+  const demographicData = useMemo(() => {
+    const surveyCounts = {};
+    logs.forEach(log => {
+      const surveyName = log.survey ? log.survey.title : 'Deleted Survey';
+      if (!surveyCounts[surveyName]) surveyCounts[surveyName] = 0;
+      surveyCounts[surveyName]++;
+    });
+    return Object.keys(surveyCounts).map(key => ({
+      name: key.length > 15 ? key.substring(0, 15) + '...' : key,
+      responses: surveyCounts[key]
+    })).sort((a, b) => b.responses - a.responses).slice(0, 7);
+  }, [logs]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,7 +117,7 @@ const AdminDashboard = () => {
         <div className="bg-white dark:bg-dark-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 h-[450px]">
           <h3 className="font-bold text-xl mb-8 text-gray-900 dark:text-white">Response Velocity</h3>
           <ResponsiveContainer width="100%" height="85%">
-            <LineChart data={mockData}>
+            <LineChart data={velocityData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
               <XAxis dataKey="name" stroke="#9ca3af" axisLine={false} tickLine={false} dy={10} />
               <YAxis stroke="#9ca3af" axisLine={false} tickLine={false} dx={-10} />
@@ -111,7 +133,7 @@ const AdminDashboard = () => {
         <div className="bg-white dark:bg-dark-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 h-[450px]">
           <h3 className="font-bold text-xl mb-8 text-gray-900 dark:text-white">Demographic Spread</h3>
           <ResponsiveContainer width="100%" height="85%">
-            <BarChart data={mockData}>
+            <BarChart data={demographicData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
               <XAxis dataKey="name" stroke="#9ca3af" axisLine={false} tickLine={false} dy={10} />
               <YAxis stroke="#9ca3af" axisLine={false} tickLine={false} dx={-10} />
