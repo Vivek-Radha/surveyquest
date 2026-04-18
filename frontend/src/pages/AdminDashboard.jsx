@@ -148,45 +148,101 @@ const AdminDashboard = () => {
       </div>
 
       <div className="mt-12">
-        <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Live Database Logs</h3>
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Live Database Logs</h3>
+          <span className="bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-2 border border-emerald-200 dark:border-emerald-800/50 shadow-sm">
+             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+             Auto-syncing
+          </span>
+        </div>
         <div className="bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-gray-600 dark:text-gray-300">
-              <thead className="bg-gray-50 dark:bg-dark-900 text-xs uppercase font-bold text-gray-700 dark:text-gray-400 border-b border-gray-100 dark:border-gray-800">
+              <thead className="bg-[#f8fafc] dark:bg-dark-900/80 text-xs uppercase font-extrabold text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-gray-800 tracking-wider">
                 <tr>
-                  <th className="px-6 py-4">Respondent</th>
-                  <th className="px-6 py-4">Survey Target</th>
-                  <th className="px-6 py-4">Timestamps</th>
-                  <th className="px-6 py-4">Response Preview</th>
-                  <th className="px-6 py-4 text-right">Actions</th>
+                  <th className="px-6 py-5">Respondent</th>
+                  <th className="px-6 py-5">Survey Target</th>
+                  <th className="px-6 py-5">Timestamp</th>
+                  <th className="px-6 py-5">Response Data</th>
+                  <th className="px-6 py-5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                 {logs.length === 0 ? (
-                  <tr><td colSpan="5" className="text-center py-8 text-gray-500">No responses logged yet</td></tr>
-                ) : logs.map((log) => (
-                  <tr key={log._id} className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-dark-700/50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                      {log.respondent ? log.respondent.name : 'Anonymous'}
-                    </td>
-                    <td className="px-6 py-4">
-                      {log.survey ? log.survey.title : 'Deleted Survey'}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {new Date(log.createdAt).toLocaleString()}
-                    </td>
-                    <td className="px-6 py-4 text-sm max-w-md overflow-hidden text-ellipsis whitespace-nowrap text-gray-700 dark:text-gray-300">
-                       {log.answers && log.answers.length > 0 
-                         ? log.answers.map(a => a.answerText).join('  •  ')
-                         : 'No content'}
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                       <button onClick={() => handleDeleteResponse(log._id)} className="text-red-500 hover:text-red-600 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 p-2 rounded-lg transition-colors border border-transparent hover:border-red-200 dark:hover:border-red-800">
-                         <Trash2 className="w-4 h-4" />
-                       </button>
-                    </td>
-                  </tr>
-                ))}
+                  <tr><td colSpan="5" className="text-center py-12 text-gray-500">No responses logged yet in the database.</td></tr>
+                ) : logs.map((log) => {
+                  
+                  // Extract username logic from first answer
+                  let respondentName = 'Anonymous';
+                  let isGuest = false;
+                  if (log.respondent && log.respondent.name) {
+                    respondentName = log.respondent.name;
+                  } else if (log.answers && log.answers.length > 0 && log.answers[0].answerText) {
+                    const possibleName = log.answers[0].answerText.trim();
+                    // Basic sanity check to ensure it's not a block of text
+                    if (possibleName.length > 1 && possibleName.length < 25) {
+                      respondentName = possibleName;
+                      isGuest = true;
+                    }
+                  }
+                  
+                  const initials = respondentName === 'Anonymous' ? '?' : respondentName.substring(0, 2).toUpperCase();
+
+                  return (
+                    <tr key={log._id} className="hover:bg-gray-50/50 dark:hover:bg-dark-700/20 transition-all duration-200 group bg-white dark:bg-dark-800">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-4">
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shadow-sm shrink-0
+                            ${respondentName === 'Anonymous' 
+                               ? 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400' 
+                               : 'bg-gradient-to-br from-indigo-100 to-blue-100 text-indigo-700 dark:from-indigo-900/40 dark:to-blue-900/40 dark:text-indigo-300 ring-1 ring-indigo-200 dark:ring-indigo-800'}
+                          `}>
+                            {initials}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-bold text-gray-900 dark:text-white flex items-center gap-2 truncate">
+                              {respondentName}
+                              {isGuest && <span className="text-[9px] uppercase tracking-wider bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 px-1.5 py-0.5 rounded border border-orange-200 dark:border-orange-800/50">Guest</span>}
+                            </p>
+                            <p className="text-[11px] font-medium text-gray-400 dark:text-gray-500 mt-0.5 font-mono">ID: {log._id.substring(log._id.length - 6)}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className="inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300 border border-blue-100 dark:border-blue-800/50 max-w-[200px] truncate">
+                          {log.survey ? log.survey.title : 'Deleted Survey'}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 font-medium">
+                        {new Date(log.createdAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex flex-wrap gap-2">
+                          {log.answers && log.answers.length > 0 ? log.answers.slice(isGuest ? 1 : 0, isGuest ? 3 : 2).map((a, i) => (
+                            <div key={i} className="max-w-[140px] inline-flex items-center px-2.5 py-1 rounded text-xs font-medium bg-gray-100 text-gray-700 dark:bg-dark-900 dark:text-gray-300 border border-gray-200 dark:border-gray-700 truncate shadow-sm">
+                              <span className="truncate">{a.answerText || 'N/A'}</span>
+                            </div>
+                          )) : <span className="text-gray-400 italic text-xs">No content provided</span>}
+                          
+                          {log.answers && log.answers.length > (isGuest ? 3 : 2) && (
+                            <div className="inline-flex items-center px-2 py-1 rounded text-xs font-bold bg-gray-50 text-gray-500 dark:bg-dark-800 dark:text-gray-400 border border-dashed border-gray-300 dark:border-gray-700">
+                              +{log.answers.length - (isGuest ? 3 : 2)}
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                         <button 
+                           onClick={() => handleDeleteResponse(log._id)} 
+                           className="text-gray-400 hover:text-red-500 bg-white dark:bg-dark-800 hover:bg-red-50 dark:hover:bg-red-900/20 p-2 rounded-lg transition-all duration-200 border border-transparent hover:border-red-200 dark:hover:border-red-800 shadow-sm opacity-0 group-hover:opacity-100 focus:opacity-100"
+                           title="Permanently Delete Response"
+                         >
+                           <Trash2 className="w-4 h-4" />
+                         </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
