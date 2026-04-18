@@ -60,7 +60,7 @@ const Dashboard = () => {
         <div className="bg-indigo-600 rounded-3xl p-8 lg:p-10 text-white shadow-xl shadow-indigo-500/20 flex flex-col justify-between relative overflow-hidden h-full">
           <div className="relative z-10 w-full">
             <h2 className="text-3xl font-extrabold mb-3 text-white">Publish your Survey</h2>
-            <p className="text-indigo-100 text-sm md:text-base mb-8 max-w-sm">Deploy data collection mechanics rapidly and gather intelligence across the global network.</p>
+            <p className="text-indigo-100 text-sm md:text-base mb-8 max-w-sm">Create deploy/publish survey rapidly </p>
           </div>
           {/* Decorative Chart Icon */}
           <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none translate-x-4 translate-y-4">
