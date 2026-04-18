@@ -78,13 +78,13 @@ const Dashboard = () => {
         </div>
 
         {/* Action 2: Join Space */}
-        <div className="bg-white dark:bg-dark-800 p-8 lg:p-10 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col justify-between h-full relative overflow-hidden">
-          <div className="relative z-10">
-            <h3 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-3">Access Survey</h3>
-            <p className="text-gray-500 text-sm md:text-base mb-8 max-w-sm">Have a private 6-digit access code? Enter it below to securely tunnel into private research environments.</p>
+        <div className="bg-indigo-600 rounded-3xl p-8 lg:p-10 text-white shadow-xl shadow-indigo-500/20 flex flex-col justify-between h-full relative overflow-hidden">
+          <div className="relative z-10 w-full">
+            <h3 className="text-3xl font-extrabold text-white mb-3">Access Survey</h3>
+            <p className="text-indigo-100 text-sm md:text-base mb-8 max-w-sm">Have a private 6-digit access code? Enter it below to securely tunnel into private research environments.</p>
           </div>
           {/* Decorative Lock Icon */}
-          <div className="absolute right-0 top-0 opacity-5 pointer-events-none -translate-y-4">
+          <div className="absolute right-0 top-0 opacity-10 pointer-events-none -translate-y-4">
             <Lock className="w-56 h-56" />
           </div>
 
@@ -92,12 +92,12 @@ const Dashboard = () => {
             <input
               type="text"
               placeholder="EX: X9T2L1"
-              className="flex-1 bg-gray-50 dark:bg-dark-900 border border-gray-200 dark:border-gray-700 rounded-xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-base md:text-lg tracking-[0.25em] uppercase font-bold text-gray-800 dark:text-gray-100 shadow-inner"
+              className="flex-1 bg-white/10 dark:bg-dark-900/30 border border-indigo-400/50 rounded-xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-white focus:bg-white focus:text-indigo-900 text-base md:text-lg tracking-[0.25em] uppercase font-bold text-white placeholder-indigo-200 shadow-inner transition-colors"
               maxLength={6}
               value={joinCode}
               onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
             />
-            <button type="submit" className="bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-white rounded-xl px-10 py-4 font-bold transition-all shadow-md shadow-gray-200 dark:shadow-none min-w-[max-content]">
+            <button type="submit" className="bg-white text-indigo-600 hover:bg-gray-50 rounded-xl px-10 py-4 font-bold transition-all shadow-md min-w-[max-content]">
               Connect
             </button>
           </form>
