@@ -72,7 +72,7 @@ const Dashboard = () => {
               whileHover={{ scale: 1.02 }}
               className="w-full sm:w-max px-10 py-4 flex items-center justify-center gap-2 bg-white text-indigo-600 rounded-xl font-bold shadow-md hover:bg-gray-50 transition-colors"
             >
-              <Plus className="w-5 h-5 font-bold" /> Compile New Survey
+              <Plus className="w-5 h-5 font-bold" /> Create New Survey
             </motion.button>
           </Link>
         </div>
